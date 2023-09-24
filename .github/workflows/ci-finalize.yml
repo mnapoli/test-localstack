@@ -1,0 +1,18 @@
+name: Create PR Preview
+
+on:
+  workflow_run:
+    workflows: ["Create PR Preview"]
+    types:
+      - completed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Finalize PR comment
+        # uses: LocalStack/setup-localstack/finish@0.1.2
+        uses: LocalStack/setup-localstack/finish@pr-preview
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          include-preview: true

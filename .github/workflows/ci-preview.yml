@@ -1,0 +1,32 @@
+name: Create PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy Preview
+        # uses: LocalStack/setup-localstack@v0.1.2
+        uses: LocalStack/setup-localstack/preview@pr-preview
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          localstack-api-key: ${{ secrets.LOCALSTACK_API_KEY }}
+          preview-cmd: |
+            export AWS_DEFAULT_REGION=us-east-1
+
+            npm install --include=dev
+            npm run build
+            composer require bref/bref
+            mv .env.example .env
+            php artisan key:generate
+            npm run serverless -- deploy --stage dev
+
+            apiId=$(awslocal apigatewayv2 get-apis| jq -r '.Items[0].ApiEndpoint')
+            echo "Upen URL: $AWS_ENDPOINT_URL/restapis/$apiId/dev/_user_request_/"

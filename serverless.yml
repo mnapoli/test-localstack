@@ -48,7 +48,7 @@ custom:
         stages:
             # list of stages for which the plugin should be enabled
             - dev
-        autostart: true  # optional - Start LocalStack in Docker on Serverless deploy
-        lambda:
-            # Enable this flag to improve performance
-            mountCode: True
+        # autostart: true  # optional - Start LocalStack in Docker on Serverless deploy
+        # lambda:
+        #     # Enable this flag to improve performance
+        #     mountCode: True
