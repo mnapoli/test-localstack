@@ -1,4 +1,4 @@
-name: Create PR Preview
+name: Finalize PR Preview
 
 on:
   workflow_run:

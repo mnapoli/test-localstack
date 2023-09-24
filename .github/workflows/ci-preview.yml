@@ -28,5 +28,6 @@ jobs:
             php artisan key:generate
             npm run serverless -- deploy --stage dev
 
-            apiId=$(awslocal apigatewayv2 get-apis| jq -r '.Items[0].ApiEndpoint')
-            echo "Upen URL: $AWS_ENDPOINT_URL/restapis/$apiId/dev/_user_request_/"
+            pip install awscli-local[ver1]
+            apiId=$(awslocal apigatewayv2 get-apis| jq -r '.Items[0].ApiId')
+            echo "Open URL: $AWS_ENDPOINT_URL/restapis/$apiId/dev/_user_request_/"
