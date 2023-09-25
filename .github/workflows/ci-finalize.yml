@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Finalize PR comment
-        # uses: LocalStack/setup-localstack/finish@0.1.2
+        # uses: LocalStack/setup-localstack/finish@main
         uses: LocalStack/setup-localstack/finish@pr-preview
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
