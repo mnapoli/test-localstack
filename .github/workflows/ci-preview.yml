@@ -13,8 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy Preview
-        # uses: LocalStack/setup-localstack@main
-        uses: LocalStack/setup-localstack/preview@pr-preview
+        uses: LocalStack/setup-localstack/preview@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           localstack-api-key: ${{ secrets.LOCALSTACK_API_KEY }}
